@@ -5,8 +5,8 @@
 <mapper namespace="com.demo.dao.AddressDao">
 
 	<!-- 查询地址列表信息 -->
-	<select id="getList" resultType="com.demo.model.Address"
-		parameterType="java.util.Map">
+	<select id="getAddressList" resultType="com.demo.model.Address"
+		parameterType="com.demo.model.Address">
         <![CDATA[
            select id,name,ucode from address
         ]]>
