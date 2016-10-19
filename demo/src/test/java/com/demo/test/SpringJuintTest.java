@@ -2,7 +2,6 @@ package com.demo.test;
 
 import java.io.FileNotFoundException;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Log4jConfigurer;
 
-import com.demo.controller.TestController;
+import com.demo.dao.AddressDao;
+import com.demo.model.Address;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations={"classpath*:/spring-mvc.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath*:/spring-mvc.xml"})
 public class SpringJuintTest {
 	
 	static{
@@ -28,10 +28,19 @@ public class SpringJuintTest {
 	}
 
 	@Autowired
-	TestController testController;
+	AddressDao addressDao;
 	
-	//@Test
+	@Test
 	public void test(){
-		System.out.println(testController.test("2").toString());
+		Address address=new Address();
+		//address.setId("2");
+		//address.setId(0);
+		address.setName("");
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println(addressDao.insertAddress(address));
+		System.out.println("========================");
+		System.out.println(address.getId());
+		System.out.println("========================");
+		//System.out.println(testController.test("2").toString());
 	}
 }

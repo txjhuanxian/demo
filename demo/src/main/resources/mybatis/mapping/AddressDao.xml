@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.dao.AddressDao">
+
+	<!-- 查询地址列表信息 -->
+	<select id="getList" resultType="com.demo.model.Address"
+		parameterType="java.util.Map">
+        <![CDATA[
+           select id,name,ucode from address
+        ]]>
+		<where>
+			1=1
+			<if test="id !=null and id !=''">
+				AND id=#{id}
+			</if>
+			<if test="name !=null and name !=''">
+				AND name=#{name}
+			</if>
+			<if test="ucode !=null and ucode !=''">
+				AND ucode=#{ucode}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertAddress" useGeneratedKeys="true"
+		parameterType="com.demo.model.Address" keyProperty="id">
+		INSERT INTO ADDRESS
+		<trim prefix="(" prefixOverrides=" " suffix=")" suffixOverrides=",">
+			<if test="id !=null ">
+				id,
+			</if>
+			<if test="name !=null ">
+				name,
+			</if>
+			<if test="ucode !=null ">
+				ucode,
+			</if>
+		</trim>
+		<trim prefix="VALUES(" prefixOverrides=" " suffix=")"
+			suffixOverrides=",">
+			<if test="id !=null ">
+				#{id},
+			</if>
+			<if test="name !=null ">
+				#{name},
+			</if>
+			<if test="ucode !=null ">
+				#{ucode},
+			</if>
+		</trim>
+
+	<!-- 	<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey> -->
+	</insert>
+</mapper>
